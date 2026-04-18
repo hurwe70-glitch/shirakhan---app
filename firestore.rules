@@ -1,0 +1,29 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // المحلات — الكل يقرأ، الكل يكتب (يمكن تقييده لاحقاً)
+    match /shops/{id} {
+      allow read: if true;
+      allow write: if true;
+    }
+
+    // الإشعارات — الكل يقرأ، الكل يكتب
+    match /notifications/{id} {
+      allow read: if true;
+      allow write: if true;
+    }
+
+    // السائقون — الكل يقرأ، الكل يكتب
+    match /drivers/{id} {
+      allow read: if true;
+      allow write: if true;
+    }
+
+    // FCM Tokens — الكل يكتب token خاص به، لا أحد يقرأ إلا عبر الـ Function
+    match /fcm_tokens/{id} {
+      allow create: if true;
+      allow read, update, delete: if false; // فقط Cloud Function تقرأ
+    }
+  }
+}
