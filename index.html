@@ -12,6 +12,8 @@
   OneSignalDeferred.push(async function(OneSignal) {
     await OneSignal.init({
       appId: "2d08eb41-a73e-4ac2-a731-5a76276bf217",
+      serviceWorkerParam: { scope: "/" },
+      serviceWorkerPath: "OneSignalSDKWorker.js",
       notifyButton: { enable: false },
       promptOptions: {
         slidedown: {
